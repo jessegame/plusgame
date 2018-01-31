@@ -1,0 +1,74 @@
+﻿syntax = "proto3";
+package messages;
+option csharp_namespace = "Messages";
+import "Proto.Actor/Protos.proto";
+
+message Done {}
+
+message RegisterPid {
+    string Name = 1;
+    actor.PID Sender = 2;
+}
+
+message UnRegisterPid{
+    string Name = 1;
+}
+
+message RequestPid {
+    string Name = 1;
+}
+
+message ResponsePid{
+    actor.PID Sender = 1;
+}
+
+message Ping {
+}
+message Pong {
+}
+
+//外网数据
+message RequestPackage{
+    int32 MsgId = 1;
+    int32 ActionId = 2;
+    string SessionId = 3;
+    int32 UserId = 4;
+    string St = 5;
+
+    int64 ReceiveTime = 6;
+
+    map<string,string> DictData = 7;
+    //异步使用
+    string ActorName = 8;
+}
+
+message ResponsePackage{
+    int32 MsgId = 1;
+    int32 ActionId = 2;
+    string SessionId = 3;
+    int32 UserId = 4;
+    string St = 5;
+
+    int64 ReceiveTime = 6;
+    int64 ResponseTime = 7;
+
+    int32 ErrorCode = 8;
+    string ErrorInfo = 9;
+
+    string Data = 10;
+}
+
+//内外数据
+message RequestData{
+    int32 MessageType = 1;
+    string MessageData = 2;
+    //异步使用
+    string ActorName = 3;
+}
+
+message ResponseData{
+    int32 MessageType = 1;
+    int32 ErrorCode = 2;
+    string ErrorInfo = 3;
+    string Data = 4;
+}
